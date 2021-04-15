@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activityAdd">
+
+
+    <TextView
+        android:id="@+id/addJumpNumLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/jumpNumber"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/addJumpNumDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="32sp"
+        android:text="104"
+        app:layout_constraintStart_toStartOf="@id/addJumpNumLabel"
+        app:layout_constraintTop_toBottomOf="@id/addJumpNumLabel" />
+
+    <TextView
+        android:id="@+id/addDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="70dp"
+        android:text="@string/date"
+        app:layout_constraintTop_toTopOf="@id/addJumpNumLabel"
+        app:layout_constraintStart_toEndOf="@id/addJumpNumLabel"/>
+
+    <EditText
+        android:id="@+id/addEditTextDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:hint="10/31/20"
+        android:inputType="date"
+        app:layout_constraintStart_toStartOf="@id/addDateLabel"
+        app:layout_constraintTop_toBottomOf="@id/addDateLabel" />
+
+    <TextView
+        android:id="@+id/addLocationLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/location"
+        app:layout_constraintStart_toEndOf="@id/addEditTextDate"
+        app:layout_constraintTop_toTopOf="@id/addDateLabel"/>
+
+    <EditText
+        android:id="@+id/addLocationDisplay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="32dp"
+        android:ems="5"
+        android:hint="MSPC"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="@id/addLocationLabel"
+        app:layout_constraintTop_toBottomOf="@id/addLocationLabel" />
+
+    <TextView
+        android:id="@+id/addAircraftLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/aircraftType"
+        app:layout_constraintTop_toBottomOf="@id/addJumpNumDisplay"
+        app:layout_constraintStart_toStartOf="@id/addJumpNumLabel"/>
+
+    <EditText
+        android:id="@+id/addEditAircraft"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:hint="Cessna 182"
+        app:layout_constraintTop_toBottomOf="@id/addAircraftLabel"
+        app:layout_constraintStart_toStartOf="@id/addAircraftLabel"/>
+
+    <TextView
+        android:id="@+id/addGearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/equipmentUsed"
+        app:layout_constraintTop_toTopOf="@id/addAircraftLabel"
+        app:layout_constraintStart_toStartOf="@id/addDateLabel"/>
+
+    <EditText
+        android:id="@+id/addEditGearLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:hint="SF2 169"
+        app:layout_constraintTop_toBottomOf="@id/addGearLabel"
+        app:layout_constraintStart_toStartOf="@id/addDateLabel"/>
+
+    <TextView
+        android:id="@+id/addExitAltLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/exitAlt"
+        app:layout_constraintTop_toTopOf="@id/addGearLabel"
+        app:layout_constraintStart_toStartOf="@id/addLocationLabel"/>
+
+    <EditText
+        android:id="@+id/addEditExitAlt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="5"
+        android:inputType="textPersonName"
+        android:hint="10K"
+        app:layout_constraintTop_toBottomOf="@id/addExitAltLabel"
+        app:layout_constraintStart_toStartOf="@id/addExitAltLabel"/>
+
+    <TextView
+        android:id="@+id/addDelayLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/delay"
+        app:layout_constraintTop_toBottomOf="@id/addEditAircraft"
+        app:layout_constraintStart_toStartOf="@id/addAircraftLabel"/>
+
+    <EditText
+        android:id="@+id/addEditDelay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="number"
+        android:hint="45"
+        app:layout_constraintTop_toBottomOf="@id/addDelayLabel"
+        app:layout_constraintStart_toStartOf="@id/addDelayLabel"/>
+
+    <TextView
+        android:id="@+id/addSurfaceWindLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/surfaceWind"
+        app:layout_constraintTop_toTopOf="@id/addDelayLabel"
+        app:layout_constraintStart_toStartOf="@id/addGearLabel"/>
+
+    <EditText
+        android:id="@+id/addEditSurfaceWind"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="text"
+        android:hint="5-10"
+        app:layout_constraintTop_toBottomOf="@id/addSurfaceWindLabel"
+        app:layout_constraintStart_toStartOf="@id/addSurfaceWindLabel"/>
+
+    <TextView
+        android:id="@+id/addDistTargetLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/distToTarget"
+        app:layout_constraintTop_toTopOf="@id/addSurfaceWindLabel"
+        app:layout_constraintStart_toStartOf="@id/addExitAltLabel"/>
+
+    <EditText
+        android:id="@+id/addEditDistTarget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="2"
+        android:inputType="text"
+        android:hint="6'"
+        app:layout_constraintTop_toBottomOf="@id/addDistTargetLabel"
+        app:layout_constraintStart_toStartOf="@id/addDistTargetLabel"/>
+
+    <TextView
+        android:id="@+id/addSignatureLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/signature"
+        app:layout_constraintTop_toTopOf="@id/addDistTargetLabel"
+        app:layout_constraintStart_toStartOf="@id/addNotesLabel"/>
+
+    <EditText
+        android:id="@+id/addEditSignature"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="John Doe D-49382"
+        app:layout_constraintTop_toBottomOf="@id/addSignatureLabel"
+        app:layout_constraintStart_toStartOf="@id/addSignatureLabel"/>
+
+    <TextView
+        android:id="@+id/addNotesLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:text="@string/notes"
+        app:layout_constraintTop_toTopOf="@id/addLocationLabel"
+        app:layout_constraintStart_toEndOf="@id/addLocationDisplay"/>
+
+    <EditText
+        android:id="@+id/addEditNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="15"
+        android:inputType="textMultiLine"
+        android:hint="Add Notes"
+        app:layout_constraintTop_toTopOf="@id/addLocationDisplay"
+        app:layout_constraintStart_toStartOf="@id/addNotesLabel"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="47dp">
+
+        <Button
+            android:id="@+id/addCancelButton"
+            android:text="@string/cancel"
+            android:onClick="cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/addSaveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="1"
+            android:text="@string/save" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
