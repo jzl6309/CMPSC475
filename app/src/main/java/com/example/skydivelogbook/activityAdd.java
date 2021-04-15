@@ -13,6 +13,7 @@ import com.example.skydivelogbook.db.Log;
 import com.example.skydivelogbook.db.LogDatabase;
 import com.example.skydivelogbook.db.LogViewModel;
 
+import static com.example.skydivelogbook.db.LogDatabase.getDatabase;
 import static com.example.skydivelogbook.db.LogDatabase.insert;
 
 public class activityAdd extends AppCompatActivity {
@@ -37,6 +38,8 @@ public class activityAdd extends AppCompatActivity {
         String sign = ((EditText)findViewById(R.id.addEditSignature)).getText().toString();
         String notes = ((EditText)findViewById(R.id.addEditNotes)).getText().toString();
 
+        getDatabase(getApplication()).logDAO().getAll();
+
         Log log = new Log(jumpNum,date,location,aircraft,equipment,altitude,delay,wind,target,sign,notes);
 
         LogDatabase.insert(log);
@@ -55,7 +58,7 @@ public class activityAdd extends AppCompatActivity {
 
     }
 
-    public void cancel(View view){
+    public void back(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

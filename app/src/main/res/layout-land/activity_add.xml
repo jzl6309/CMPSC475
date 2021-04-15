@@ -222,8 +222,8 @@
 
         <Button
             android:id="@+id/addCancelButton"
-            android:text="@string/cancel"
-            android:onClick="cancel"
+            android:text="@string/back"
+            android:onClick="back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -232,6 +232,7 @@
 
         <Button
             android:id="@+id/addSaveButton"
+            android:onClick="save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"

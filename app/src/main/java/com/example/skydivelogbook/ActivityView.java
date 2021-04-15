@@ -43,13 +43,20 @@ public class ActivityView extends AppCompatActivity {
         class LogViewHolder extends RecyclerView.ViewHolder {
             private final TextView jumpNumView;
             private final TextView dateView;
+            private final TextView locationView;
+            private final TextView aircraftView;
+            private final TextView equipmentView;
+            private final TextView notesView;
             private Log log;
 
             private LogViewHolder(View itemView) {
                 super(itemView);
                 jumpNumView = itemView.findViewById(R.id.listJumpNum);
                 dateView = itemView.findViewById(R.id.listDate);
-
+                locationView = itemView.findViewById(R.id.listLocation);
+                aircraftView = itemView.findViewById(R.id.listAircraft);
+                equipmentView = itemView.findViewById(R.id.listEquipment);
+                notesView = itemView.findViewById(R.id.listNotes);
             }
         }
 
@@ -61,7 +68,7 @@ public class ActivityView extends AppCompatActivity {
         @Override
         public LogViewHolder onCreateViewHolder (ViewGroup parent, int viewType) {
             View itemView = layoutInflater.inflate(R.layout.list_item, parent, false);
-            System.out.println("I AM HERE");
+
             return new LogViewHolder(itemView);
         }
 
@@ -70,11 +77,15 @@ public class ActivityView extends AppCompatActivity {
             if (logs != null) {
                 Log current = logs.get(position);
                 holder.log = current;
-                holder.jumpNumView.setText(current.jumpNum);
+                holder.jumpNumView.setText(Integer.toString(current.jumpNum));
                 holder.dateView.setText(current.date);
+                holder.locationView.setText(current.location);
+                holder.aircraftView.setText(current.aircraft);
+                holder.equipmentView.setText(current.equipment);
+                holder.notesView.setText(current.notes);
             }
             else {
-                holder.jumpNumView.setText("...initializing...");
+                holder.jumpNumView.setText("@string/initializing");
             }
         }
 

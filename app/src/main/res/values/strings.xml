@@ -21,4 +21,6 @@
     <string name="distToTarget">Dist to Target</string>
     <string name="signature">Signature</string>
     <string name="notes">Notes</string>
+    <string name="initializing">...Initializing</string>
+    <string name="back">Back</string>
 </resources>
