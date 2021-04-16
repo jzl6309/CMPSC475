@@ -23,4 +23,6 @@
     <string name="notes">Notes</string>
     <string name="initializing">...Initializing</string>
     <string name="back">Back</string>
+    <string name="edit">Edit</string>
+    <string name="menuSettings">Settings</string>
 </resources>

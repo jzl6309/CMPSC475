@@ -22,7 +22,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="32sp"
-        android:text="104"
         app:layout_constraintStart_toStartOf="@id/addJumpNumLabel"
         app:layout_constraintTop_toBottomOf="@id/addJumpNumLabel" />
 
@@ -40,7 +39,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="5"
-        android:hint="10/31/20"
         android:inputType="date"
         app:layout_constraintStart_toStartOf="@id/addDateLabel"
         app:layout_constraintTop_toBottomOf="@id/addDateLabel" />
@@ -60,7 +58,6 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="32dp"
         android:ems="5"
-        android:hint="MSPC"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="@id/addLocationLabel"
         app:layout_constraintTop_toBottomOf="@id/addLocationLabel" />
@@ -80,7 +77,6 @@
         android:layout_height="wrap_content"
         android:ems="5"
         android:inputType="textPersonName"
-        android:hint="Cessna 182"
         app:layout_constraintTop_toBottomOf="@id/addAircraftLabel"
         app:layout_constraintStart_toStartOf="@id/addAircraftLabel"/>
 
@@ -98,7 +94,6 @@
         android:layout_height="wrap_content"
         android:ems="5"
         android:inputType="textPersonName"
-        android:hint="SF2 169"
         app:layout_constraintTop_toBottomOf="@id/addGearLabel"
         app:layout_constraintStart_toStartOf="@id/addDateLabel"/>
 
@@ -116,7 +111,6 @@
         android:layout_height="wrap_content"
         android:ems="5"
         android:inputType="textPersonName"
-        android:hint="10K"
         app:layout_constraintTop_toBottomOf="@id/addExitAltLabel"
         app:layout_constraintStart_toStartOf="@id/addExitAltLabel"/>
 
@@ -135,7 +129,6 @@
         android:layout_height="wrap_content"
         android:ems="2"
         android:inputType="number"
-        android:hint="45"
         app:layout_constraintTop_toBottomOf="@id/addDelayLabel"
         app:layout_constraintStart_toStartOf="@id/addDelayLabel"/>
 
@@ -151,9 +144,8 @@
         android:id="@+id/addEditSurfaceWind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="2"
+        android:ems="3"
         android:inputType="text"
-        android:hint="5-10"
         app:layout_constraintTop_toBottomOf="@id/addSurfaceWindLabel"
         app:layout_constraintStart_toStartOf="@id/addSurfaceWindLabel"/>
 
@@ -171,7 +163,6 @@
         android:layout_height="wrap_content"
         android:ems="2"
         android:inputType="text"
-        android:hint="6'"
         app:layout_constraintTop_toBottomOf="@id/addDistTargetLabel"
         app:layout_constraintStart_toStartOf="@id/addDistTargetLabel"/>
 
@@ -189,7 +180,6 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        android:hint="John Doe D-49382"
         app:layout_constraintTop_toBottomOf="@id/addSignatureLabel"
         app:layout_constraintStart_toStartOf="@id/addSignatureLabel"/>
 
@@ -208,7 +198,6 @@
         android:layout_height="wrap_content"
         android:ems="15"
         android:inputType="textMultiLine"
-        android:hint="Add Notes"
         app:layout_constraintTop_toTopOf="@id/addLocationDisplay"
         app:layout_constraintStart_toStartOf="@id/addNotesLabel"/>
 

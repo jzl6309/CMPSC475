@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="match_parent" >
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/purple_500"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/jumpNumberLabel"
@@ -14,13 +25,12 @@
         android:layout_marginTop="16dp"
         android:text="@string/jumpNumber"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/jumpNumberDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="103"
         android:textSize="64sp"
         app:layout_constraintStart_toStartOf="@id/jumpNumberLabel"
         app:layout_constraintTop_toBottomOf="@id/jumpNumberLabel" />
@@ -30,11 +40,12 @@
         android:id="@+id/nameDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/joshleppo"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="64dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_marginEnd="96dp"
+        android:enabled="true"
+        android:hint="Your Name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <TextView
         android:id="@+id/uspaLabel"
@@ -49,8 +60,8 @@
         android:id="@+id/upsaNumberDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="321987"
         android:textSize="32sp"
+        android:enabled="false"
         app:layout_constraintStart_toStartOf="@+id/uspaLabel"
         app:layout_constraintTop_toBottomOf="@+id/uspaLabel" />
 
@@ -66,8 +77,8 @@
         android:id="@+id/uspaLicenseDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="C-49528"
         android:textSize="32sp"
+        android:enabled="false"
         app:layout_constraintTop_toBottomOf="@id/uspaLicenseLabel"
         app:layout_constraintStart_toStartOf="@id/uspaLicenseLabel"/>
 
@@ -84,7 +95,6 @@
         android:id="@+id/lastJumpDiplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="2/21/21"
         android:textSize="32sp"
         app:layout_constraintTop_toBottomOf="@id/lastJumpLabel"
         app:layout_constraintStart_toStartOf="@id/lastJumpLabel"
@@ -102,6 +112,7 @@
             android:id="@+id/addButton"
             android:text="@string/add"
             android:onClick="add"
+            android:background="@color/purple_500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -115,6 +126,7 @@
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_weight="1"
+            android:background="@color/purple_500"
             android:text="@string/view"
             android:onClick="view"/>
 
