@@ -1,7 +1,5 @@
 package com.example.skydivelogbook.db;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -10,13 +8,14 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
-import android.app.Application;
-import androidx.lifecycle.AndroidViewModel;
 
 @Database(entities = {Log.class}, version = 1, exportSchema = false)
 public abstract class LogDatabase extends RoomDatabase {
     public interface LogListener{
         void onLogReturned(Log log);
+    }
+    public interface MaxListener{
+        void onMaxReturned(int max);
     }
 
     public abstract LogDAO logDAO();
@@ -71,6 +70,19 @@ public abstract class LogDatabase extends RoomDatabase {
                 return null;
             }
         }.execute(log);
+    }
+
+    public static void getMaxJump(MaxListener listener) {
+        new AsyncTask<Void,Void,Integer>() {
+            protected Integer doInBackground(Void... voids) {
+                return INSTANCE.logDAO().getMaxJump();
+            }
+
+            protected void onPostExecute(Integer max) {
+                super.onPostExecute(max);
+                listener.onMaxReturned(max);
+            }
+        }.execute();
     }
 
     public static void update(Log log) {

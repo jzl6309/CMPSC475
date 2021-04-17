@@ -17,6 +17,9 @@ public interface LogDAO {
     @Query("SELECT * FROM Logs WHERE jumpNum = :jumpNum")
     Log getLog(int jumpNum);
 
+    @Query("SELECT max(jumpNum) FROM Logs")
+    int getMaxJump();
+
     @Insert
     void insert(Log... logs);
 

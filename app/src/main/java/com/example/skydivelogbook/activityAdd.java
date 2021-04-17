@@ -56,10 +56,13 @@ public class activityAdd extends AppCompatActivity {
         ((EditText)findViewById(R.id.addEditSignature)).setText("");
         ((EditText)findViewById(R.id.addEditNotes)).setText("");
 
+        findViewById(R.id.addJumpNumDisplay).setFocusable(true);
+        findViewById(R.id.addJumpNumDisplay).requestFocus();
+
     }
 
     public void back(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class );
         startActivity(intent);
     }
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,6 +37,16 @@ public class ActivityView extends AppCompatActivity {
         logViewModel = new ViewModelProvider(this).get(LogViewModel.class);
         logViewModel.getAllLogs().observe(this,adapter::setLogs);
 
+    }
+
+    public void add(View view) {
+        Intent intent = new Intent(this, activityAdd.class);
+        startActivity(intent);
+    }
+
+    public void back(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public class LogListAdapter extends RecyclerView.Adapter<LogListAdapter.LogViewHolder> {
