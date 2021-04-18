@@ -128,11 +128,4 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-
-    }
-
-
 }

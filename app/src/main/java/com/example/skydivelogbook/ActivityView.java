@@ -68,6 +68,13 @@ public class ActivityView extends AppCompatActivity {
                 aircraftView = itemView.findViewById(R.id.listAircraft);
                 equipmentView = itemView.findViewById(R.id.listEquipment);
                 notesView = itemView.findViewById(R.id.listNotes);
+
+                itemView.setOnClickListener(view -> {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("jumpNum", jumpNumView.getText().toString());
+                    startActivity((new Intent(ActivityView.this, ActivityUpdate.class).putExtras(bundle)));
+                });
+
             }
         }
 

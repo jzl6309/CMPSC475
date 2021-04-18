@@ -38,8 +38,6 @@ public class activityAdd extends AppCompatActivity {
         String sign = ((EditText)findViewById(R.id.addEditSignature)).getText().toString();
         String notes = ((EditText)findViewById(R.id.addEditNotes)).getText().toString();
 
-        getDatabase(getApplication()).logDAO().getAll();
-
         Log log = new Log(jumpNum,date,location,aircraft,equipment,altitude,delay,wind,target,sign,notes);
 
         LogDatabase.insert(log);

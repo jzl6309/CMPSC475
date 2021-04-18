@@ -4,202 +4,202 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activityAdd">
+    tools:context=".ActivityUpdate">
 
 
     <TextView
-        android:id="@+id/addJumpNumLabel"
+        android:id="@+id/updateJumpNumLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/jumpNumber"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <EditText
-        android:id="@+id/addJumpNumDisplay"
+        android:id="@+id/updateJumpNumDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="5"
-        app:layout_constraintStart_toStartOf="@id/addJumpNumLabel"
-        app:layout_constraintTop_toBottomOf="@id/addJumpNumLabel" />
+        app:layout_constraintStart_toStartOf="@id/updateJumpNumLabel"
+        app:layout_constraintTop_toBottomOf="@id/updateJumpNumLabel" />
 
     <TextView
-        android:id="@+id/addDateLabel"
+        android:id="@+id/updateDateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
         android:text="@string/date"
-        app:layout_constraintTop_toTopOf="@id/addJumpNumLabel"
-        app:layout_constraintStart_toEndOf="@id/addJumpNumLabel"/>
+        app:layout_constraintTop_toTopOf="@id/updateJumpNumLabel"
+        app:layout_constraintStart_toEndOf="@id/updateJumpNumLabel"/>
 
     <EditText
-        android:id="@+id/addEditTextDate"
+        android:id="@+id/updateEditTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="5"
         android:inputType="date"
-        app:layout_constraintStart_toStartOf="@id/addDateLabel"
-        app:layout_constraintTop_toBottomOf="@id/addDateLabel" />
+        app:layout_constraintStart_toStartOf="@id/updateDateLabel"
+        app:layout_constraintTop_toBottomOf="@id/updateDateLabel" />
 
     <TextView
-        android:id="@+id/addLocationLabel"
+        android:id="@+id/updateLocationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
         android:text="@string/location"
-        app:layout_constraintStart_toEndOf="@id/addEditTextDate"
-        app:layout_constraintTop_toTopOf="@id/addDateLabel"/>
+        app:layout_constraintStart_toStartOf="@id/updateLocationDisplay"
+        app:layout_constraintTop_toTopOf="@id/updateDateLabel"/>
 
     <EditText
-        android:id="@+id/addLocationDisplay"
+        android:id="@+id/updateLocationDisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="32dp"
         android:ems="5"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@id/addLocationLabel"
-        app:layout_constraintTop_toBottomOf="@id/addLocationLabel" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updateLocationLabel" />
 
     <TextView
-        android:id="@+id/addAircraftLabel"
+        android:id="@+id/updateAircraftLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/aircraftType"
-        app:layout_constraintTop_toBottomOf="@id/addJumpNumDisplay"
-        app:layout_constraintStart_toStartOf="@id/addJumpNumLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateJumpNumDisplay"
+        app:layout_constraintStart_toStartOf="@id/updateJumpNumLabel"/>
 
     <EditText
-        android:id="@+id/addEditAircraft"
+        android:id="@+id/updateEditAircraft"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="5"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/addAircraftLabel"
-        app:layout_constraintStart_toStartOf="@id/addAircraftLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateAircraftLabel"
+        app:layout_constraintStart_toStartOf="@id/updateAircraftLabel"/>
 
     <TextView
-        android:id="@+id/addGearLabel"
+        android:id="@+id/updateGearLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/equipmentUsed"
-        app:layout_constraintTop_toTopOf="@id/addAircraftLabel"
-        app:layout_constraintStart_toStartOf="@id/addDateLabel"/>
+        app:layout_constraintTop_toTopOf="@id/updateAircraftLabel"
+        app:layout_constraintStart_toStartOf="@id/updateDateLabel"/>
 
     <EditText
-        android:id="@+id/addEditGearLabel"
+        android:id="@+id/updateEditGearLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="5"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/addGearLabel"
-        app:layout_constraintStart_toStartOf="@id/addDateLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateGearLabel"
+        app:layout_constraintStart_toStartOf="@id/updateDateLabel"/>
 
     <TextView
-        android:id="@+id/addExitAltLabel"
+        android:id="@+id/updateExitAltLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/exitAlt"
-        app:layout_constraintTop_toTopOf="@id/addGearLabel"
-        app:layout_constraintStart_toStartOf="@id/addLocationLabel"/>
+        app:layout_constraintTop_toTopOf="@id/updateGearLabel"
+        app:layout_constraintStart_toStartOf="@id/updateLocationLabel"/>
 
     <EditText
-        android:id="@+id/addEditExitAlt"
+        android:id="@+id/updateEditExitAlt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="5"
         android:inputType="textPersonName"
-        app:layout_constraintTop_toBottomOf="@id/addExitAltLabel"
-        app:layout_constraintStart_toStartOf="@id/addExitAltLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateExitAltLabel"
+        app:layout_constraintStart_toStartOf="@id/updateExitAltLabel"/>
 
     <TextView
-        android:id="@+id/addDelayLabel"
+        android:id="@+id/updateDelayLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/delay"
-        app:layout_constraintTop_toBottomOf="@id/addEditAircraft"
-        app:layout_constraintStart_toStartOf="@id/addAircraftLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateEditAircraft"
+        app:layout_constraintStart_toStartOf="@id/updateAircraftLabel"/>
 
     <EditText
-        android:id="@+id/addEditDelay"
+        android:id="@+id/updateEditDelay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="2"
         android:inputType="number"
-        app:layout_constraintTop_toBottomOf="@id/addDelayLabel"
-        app:layout_constraintStart_toStartOf="@id/addDelayLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateDelayLabel"
+        app:layout_constraintStart_toStartOf="@id/updateDelayLabel"/>
 
     <TextView
-        android:id="@+id/addSurfaceWindLabel"
+        android:id="@+id/updateSurfaceWindLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/surfaceWind"
-        app:layout_constraintTop_toTopOf="@id/addDelayLabel"
-        app:layout_constraintStart_toStartOf="@id/addGearLabel"/>
+        app:layout_constraintTop_toTopOf="@id/updateDelayLabel"
+        app:layout_constraintStart_toStartOf="@id/updateGearLabel"/>
 
     <EditText
-        android:id="@+id/addEditSurfaceWind"
+        android:id="@+id/updateEditSurfaceWind"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="3"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/addSurfaceWindLabel"
-        app:layout_constraintStart_toStartOf="@id/addSurfaceWindLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateSurfaceWindLabel"
+        app:layout_constraintStart_toStartOf="@id/updateSurfaceWindLabel"/>
 
     <TextView
-        android:id="@+id/addDistTargetLabel"
+        android:id="@+id/updateDistTargetLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/distToTarget"
-        app:layout_constraintTop_toTopOf="@id/addSurfaceWindLabel"
-        app:layout_constraintStart_toStartOf="@id/addExitAltLabel"/>
+        app:layout_constraintTop_toTopOf="@id/updateSurfaceWindLabel"
+        app:layout_constraintStart_toStartOf="@id/updateExitAltLabel"/>
 
     <EditText
-        android:id="@+id/addEditDistTarget"
+        android:id="@+id/updateEditDistTarget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="3"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/addDistTargetLabel"
-        app:layout_constraintStart_toStartOf="@id/addDistTargetLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateDistTargetLabel"
+        app:layout_constraintStart_toStartOf="@id/updateDistTargetLabel"/>
 
     <TextView
-        android:id="@+id/addSignatureLabel"
+        android:id="@+id/updateSignatureLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/signature"
-        app:layout_constraintTop_toTopOf="@id/addDistTargetLabel"
-        app:layout_constraintStart_toStartOf="@id/addNotesLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateEditDelay"
+        app:layout_constraintStart_toStartOf="@id/updateDelayLabel"/>
 
     <EditText
-        android:id="@+id/addEditSignature"
+        android:id="@+id/updateEditSignature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/addSignatureLabel"
-        app:layout_constraintStart_toStartOf="@id/addSignatureLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateSignatureLabel"
+        app:layout_constraintStart_toStartOf="@id/updateSignatureLabel"/>
 
     <TextView
-        android:id="@+id/addNotesLabel"
+        android:id="@+id/updateNotesLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
+        android:layout_marginTop="32dp"
         android:text="@string/notes"
-        app:layout_constraintTop_toTopOf="@id/addLocationLabel"
-        app:layout_constraintStart_toEndOf="@id/addLocationDisplay"/>
+        app:layout_constraintTop_toBottomOf="@id/updateEditSignature"
+        app:layout_constraintStart_toStartOf="@id/updateSignatureLabel"/>
 
     <EditText
-        android:id="@+id/addEditNotes"
+        android:id="@+id/updateEditNotes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="15"
         android:inputType="textMultiLine"
-        app:layout_constraintTop_toTopOf="@id/addLocationDisplay"
-        app:layout_constraintStart_toStartOf="@id/addNotesLabel"/>
+        app:layout_constraintTop_toBottomOf="@id/updateNotesLabel"
+        app:layout_constraintStart_toStartOf="@id/updateNotesLabel"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -210,24 +210,24 @@
         tools:layout_editor_absoluteX="47dp">
 
         <Button
-            android:id="@+id/addCancelButton"
-            android:text="@string/back"
-            android:onClick="back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/addSaveButton"
-            android:onClick="save"
+            android:id="@+id/updateBackButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
             android:layout_weight="1"
-            android:text="@string/save" />
+            android:text="@string/cancel"
+            android:onClick="cancel"/>
+
+        <Button
+            android:id="@+id/updateSaveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_weight="1"
+            android:text="@string/update"
+            android:onClick="update"/>
 
     </LinearLayout>
 
