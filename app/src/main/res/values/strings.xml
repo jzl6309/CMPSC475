@@ -26,4 +26,5 @@
     <string name="edit">Edit</string>
     <string name="menuSettings">Settings</string>
     <string name="update">Update</string>
+    <string name="upload">Upload</string>
 </resources>

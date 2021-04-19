@@ -11,9 +11,13 @@ import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.skydivelogbook.db.Log;
 import com.example.skydivelogbook.db.LogViewModel;
@@ -23,11 +27,14 @@ import java.util.List;
 public class ActivityView extends AppCompatActivity {
 
     private LogViewModel logViewModel;
+    private Menu optionsMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view);
+
+        setSupportActionBar(findViewById(R.id.view_toolbar));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         LogListAdapter adapter = new LogListAdapter(this);
@@ -37,6 +44,27 @@ public class ActivityView extends AppCompatActivity {
         logViewModel = new ViewModelProvider(this).get(LogViewModel.class);
         logViewModel.getAllLogs().observe(this,adapter::setLogs);
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        optionsMenu = menu;
+
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_view, menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuUpload:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void add(View view) {
