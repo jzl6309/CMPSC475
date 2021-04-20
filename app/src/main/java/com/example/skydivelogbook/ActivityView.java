@@ -22,6 +22,7 @@ import android.widget.Toolbar;
 import com.example.skydivelogbook.db.Log;
 import com.example.skydivelogbook.db.LogViewModel;
 
+import java.io.IOException;
 import java.util.List;
 
 public class ActivityView extends AppCompatActivity {
@@ -60,7 +61,13 @@ public class ActivityView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuUpload:
-
+                SheetsAPI sheetsAPI = new SheetsAPI();
+                try {
+                    sheetsAPI.run();
+                }
+                catch (Exception e) {
+                    System.out.println("IT DID NOT WORK: " + e);
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
