@@ -23,12 +23,41 @@ import com.example.skydivelogbook.db.Log;
 import com.example.skydivelogbook.db.LogViewModel;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.util.Collections;
 import java.util.List;
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
+import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
+import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
+import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.http.javanet.NetHttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.google.api.client.util.store.FileDataStoreFactory;
+import com.google.api.services.sheets.v4.Sheets;
+import com.google.api.services.sheets.v4.SheetsScopes;
+import com.google.api.services.sheets.v4.model.Spreadsheet;
+import com.google.api.services.sheets.v4.model.SpreadsheetProperties;
 
 public class ActivityView extends AppCompatActivity {
 
     private LogViewModel logViewModel;
     private Menu optionsMenu;
+    private static final String TAG = "LOOK HERE: ";
+    private final int RC_SIGN_IN = 1;
+    private GoogleSignInClient mGoogleSignInClient;
+    private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+    private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
+    private static final String APPLICATION_NAME = "SkyDiveLogBook";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +74,19 @@ public class ActivityView extends AppCompatActivity {
         logViewModel = new ViewModelProvider(this).get(LogViewModel.class);
         logViewModel.getAllLogs().observe(this,adapter::setLogs);
 
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
     }
 
     @Override
@@ -61,17 +103,78 @@ public class ActivityView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuUpload:
-                SheetsAPI sheetsAPI = new SheetsAPI();
+                signIn();
                 try {
-                    sheetsAPI.run();
+                    writeData();
                 }
-                catch (Exception e) {
-                    System.out.println("IT DID NOT WORK: " + e);
+                catch (GeneralSecurityException e ) {
+                    System.out.println("DANG IT: " + e);
+                }
+                catch (IOException e) {
+                    System.out.println("DARN IT: " + e);
                 }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    public void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            handleSignInResult(task);
+        }
+    }
+
+    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+
+        } catch (ApiException e) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            android.util.Log.w(TAG, "signInResult:failed code=" + e.getStatusCode());
+        }
+    }
+
+    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
+        // Load client secrets.
+        GoogleClientSecrets.Details clientSecret = new GoogleClientSecrets.Details().setClientSecret("BY0yStDcybfs-GHHCg3vivEp");
+        GoogleClientSecrets clientSecrets = new GoogleClientSecrets().setInstalled(clientSecret);
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File("tokens")))
+                .setAccessType("offline")
+                .build();
+        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
+        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
+    }
+
+
+    public void writeData() throws IOException, GeneralSecurityException {
+            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
+            Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
+                    .setApplicationName(APPLICATION_NAME)
+                    .build();
+
+            Spreadsheet spreadsheet = new Spreadsheet()
+                    .setProperties(new SpreadsheetProperties().setTitle("logBook"));
+            spreadsheet = service.spreadsheets().create(spreadsheet)
+                    .setFields("spreadsheetID")
+                    .execute();
     }
 
     public void add(View view) {
