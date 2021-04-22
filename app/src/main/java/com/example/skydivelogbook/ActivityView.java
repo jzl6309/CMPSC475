@@ -1,11 +1,14 @@
 package com.example.skydivelogbook;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.accounts.Account;
 import android.content.Context;
 import android.content.Intent;
 import android.nfc.Tag;
@@ -32,12 +35,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.tasks.Task;
 import com.google.api.client.auth.oauth2.Credential;
 import com.google.api.client.extensions.java6.auth.oauth2.AuthorizationCodeInstalledApp;
 import com.google.api.client.extensions.jetty.auth.oauth2.LocalServerReceiver;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -58,6 +64,11 @@ public class ActivityView extends AppCompatActivity {
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final List<String> SCOPES = Collections.singletonList(SheetsScopes.SPREADSHEETS_READONLY);
     private static final String APPLICATION_NAME = "SkyDiveLogBook";
+    private static final String SCOPE = "";
+    private static final String CLIENT_ID = "1075933492779-pp2f13tvgn8kb76sk5mc2alm5sa5mrut.apps.googleusercontent.com";
+    private GoogleSignInAccount account;
+    private GoogleSignInOptions gso;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,8 +85,10 @@ public class ActivityView extends AppCompatActivity {
         logViewModel = new ViewModelProvider(this).get(LogViewModel.class);
         logViewModel.getAllLogs().observe(this,adapter::setLogs);
 
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+        gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestScopes(new Scope("https://www.googleapis.com/auth/spreadsheets"))
                 .requestEmail()
+                .requestIdToken(CLIENT_ID)
                 .build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -85,8 +98,18 @@ public class ActivityView extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        account = GoogleSignIn.getLastSignedInAccount(this);
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
+        if (account == null ) {
+            System.out.println("UGH ITS NULL");
+            gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestScopes(new Scope("https://www.googleapis.com/auth/spreadsheets"))
+                    .requestEmail()
+                    .requestIdToken(CLIENT_ID)
+                    .build();
+
+            mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+        }
     }
 
     @Override
@@ -104,15 +127,29 @@ public class ActivityView extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menuUpload:
                 signIn();
-                try {
-                    writeData();
-                }
-                catch (GeneralSecurityException e ) {
-                    System.out.println("DANG IT: " + e);
-                }
-                catch (IOException e) {
-                    System.out.println("DARN IT: " + e);
-                }
+
+                ActivityResultLauncher<String> requestPermissionLauncher =
+                    registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                        if (isGranted) {
+                            // Permission is granted. Continue the action or workflow in your
+                            // app.
+                            try {
+                                writeData();
+                            }
+                            catch (GeneralSecurityException e ) {
+                                System.out.println("DANG IT: " + e);
+                            }
+                            catch (IOException e) {
+                                System.out.println("DARN IT: " + e);
+                            }
+                        } else {
+                            // Explain to the user that the feature is unavailable because the
+                            // features requires a permission that the user has denied. At the
+                            // same time, respect the user's decision. Don't link to system
+                            // settings in an effort to convince the user to change their
+                            // decision.
+                        }
+                    });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -139,7 +176,7 @@ public class ActivityView extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            account = completedTask.getResult(ApiException.class);
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
@@ -148,33 +185,22 @@ public class ActivityView extends AppCompatActivity {
         }
     }
 
-    private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
-        // Load client secrets.
-        GoogleClientSecrets.Details clientSecret = new GoogleClientSecrets.Details().setClientSecret("BY0yStDcybfs-GHHCg3vivEp");
-        GoogleClientSecrets clientSecrets = new GoogleClientSecrets().setInstalled(clientSecret);
-        // Build flow and trigger user authorization request.
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
-                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
-                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File("tokens")))
-                .setAccessType("offline")
-                .build();
-        LocalServerReceiver receiver = new LocalServerReceiver.Builder().setPort(8888).build();
-        return new AuthorizationCodeInstalledApp(flow, receiver).authorize("user");
-    }
-
-
     public void writeData() throws IOException, GeneralSecurityException {
-            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 
-            Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, getCredentials(HTTP_TRANSPORT))
-                    .setApplicationName(APPLICATION_NAME)
-                    .build();
+        final NetHttpTransport HTTP_TRANSPORT = new com.google.api.client.http.javanet.NetHttpTransport();
 
-            Spreadsheet spreadsheet = new Spreadsheet()
-                    .setProperties(new SpreadsheetProperties().setTitle("logBook"));
-            spreadsheet = service.spreadsheets().create(spreadsheet)
-                    .setFields("spreadsheetID")
-                    .execute();
+        GoogleAccountCredential credential = GoogleAccountCredential.usingOAuth2(ActivityView.this, Collections.singleton("https://www.googleapis.com/auth/spreadsheets"));
+
+        Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, credential)
+                .setApplicationName(APPLICATION_NAME)
+                .build();
+
+        Spreadsheet spreadsheet = new Spreadsheet()
+                .setProperties(new SpreadsheetProperties().setTitle("logBook"));
+        spreadsheet = service.spreadsheets().create(spreadsheet)
+                .setFields("spreadsheetID")
+                .execute();
+        System.out.println("Spreadsheet " + spreadsheet.getSpreadsheetId());
     }
 
     public void add(View view) {
