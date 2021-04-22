@@ -1,6 +1,6 @@
-package com.example.skydivelogbook.data;
+package com.example.myskydivelogbook.data;
 
-import com.example.skydivelogbook.data.model.LoggedInUser;
+import com.example.myskydivelogbook.data.model.LoggedInUser;
 
 /**
  * Class that requests authentication and user information from the remote data source and

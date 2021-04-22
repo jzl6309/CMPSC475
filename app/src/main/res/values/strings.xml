@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SkyDiveLogBook</string>
+    <string name="app_name">mySkyDiveLogBook</string>
     <string name="jumpNumber">Jump #</string>
     <string name="add">Add</string>
     <string name="view">View</string>

@@ -1,4 +1,4 @@
-package com.example.skydivelogbook;
+package com.example.myskydivelogbook;
 
 import android.content.Context;
 

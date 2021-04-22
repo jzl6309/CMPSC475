@@ -1,8 +1,7 @@
-package com.example.skydivelogbook.db;
+package com.example.myskydivelogbook.db;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;

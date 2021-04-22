@@ -1,4 +1,4 @@
-package com.example.skydivelogbook;
+package com.example.myskydivelogbook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,10 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.skydivelogbook.db.Log;
-import com.example.skydivelogbook.db.LogDatabase;
-
-import java.util.concurrent.atomic.AtomicReference;
+import com.example.myskydivelogbook.db.Log;
+import com.example.myskydivelogbook.db.LogDatabase;
 
 public class MainActivity extends AppCompatActivity {
 

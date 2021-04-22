@@ -1,4 +1,4 @@
-package com.example.skydivelogbook.db;
+package com.example.myskydivelogbook.db;
 
 import android.content.Context;
 import android.os.AsyncTask;

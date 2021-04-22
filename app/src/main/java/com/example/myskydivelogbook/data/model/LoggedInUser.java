@@ -1,4 +1,4 @@
-package com.example.skydivelogbook.data.model;
+package com.example.myskydivelogbook.data.model;
 
 /**
  * Data class that captures user information for logged in users retrieved from LoginRepository

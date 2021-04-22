@@ -1,7 +1,6 @@
-package com.example.skydivelogbook;
+package com.example.myskydivelogbook;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,12 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.skydivelogbook.db.Log;
-import com.example.skydivelogbook.db.LogDatabase;
-import com.example.skydivelogbook.db.LogViewModel;
-
-import static com.example.skydivelogbook.db.LogDatabase.getDatabase;
-import static com.example.skydivelogbook.db.LogDatabase.insert;
+import com.example.myskydivelogbook.db.Log;
+import com.example.myskydivelogbook.db.LogDatabase;
 
 public class activityAdd extends AppCompatActivity {
 

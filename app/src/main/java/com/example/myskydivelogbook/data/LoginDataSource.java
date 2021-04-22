@@ -1,6 +1,6 @@
-package com.example.skydivelogbook.data;
+package com.example.myskydivelogbook.data;
 
-import com.example.skydivelogbook.data.model.LoggedInUser;
+import com.example.myskydivelogbook.data.model.LoggedInUser;
 
 import java.io.IOException;
 

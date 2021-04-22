@@ -1,4 +1,4 @@
-package com.example.skydivelogbook;
+package com.example.myskydivelogbook;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.skydivelogbook.db.Log;
-import com.example.skydivelogbook.db.LogDatabase;
+import com.example.myskydivelogbook.db.Log;
+import com.example.myskydivelogbook.db.LogDatabase;
 
 public class ActivityUpdate extends AppCompatActivity {
 

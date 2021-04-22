@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.skydivelogbook" >
+    package="com.example.myskydivelogbook" >
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -11,14 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar" >
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
-        </activity>
-        <activity android:name=".ActivityView" />
-        <activity android:name=".ActivityUpdate" />
-        <activity android:name=".activityAdd" />
-        <activity android:name=".MainActivity" >
+
+        <activity android:name="com.example.myskydivelogbook.ActivityView" />
+        <activity android:name="com.example.myskydivelogbook.ActivityUpdate" />
+        <activity android:name="com.example.myskydivelogbook.activityAdd" />
+        <activity android:name="com.example.myskydivelogbook.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
