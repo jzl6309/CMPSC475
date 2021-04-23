@@ -85,6 +85,19 @@ public abstract class LogDatabase extends RoomDatabase {
         }.execute();
     }
 
+    public static void getCount(MaxListener listener) {
+        new AsyncTask<Void,Void,Integer>() {
+            protected Integer doInBackground(Void... voids) {
+                return INSTANCE.logDAO().getCount();
+            }
+
+            protected void onPostExecute(Integer max) {
+                super.onPostExecute(max);
+                listener.onMaxReturned(max);
+            }
+        }.execute();
+    }
+
     public static void update(Log log) {
         new AsyncTask<Log, Void, Void>() {
             protected Void doInBackground(Log... logs) {

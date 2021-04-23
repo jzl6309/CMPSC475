@@ -58,15 +58,18 @@ public class ActivityView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuUpload:
+                myFirestore.getInstance().authenticate(this,((success, status) -> {
+                    if (success) System.out.println("YAAYYY!!! " + status);
+                    else System.out.println("BOOOO!! " + status);
+                }));
 
+                myFirestore.getInstance().writeToDatabase();
 
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    public boolean
 
     public void add(View view) {
         Intent intent = new Intent(this, activityAdd.class);
