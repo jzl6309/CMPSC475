@@ -28,17 +28,6 @@ public class LogonActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = auth.getCurrentUser();
-        if(currentUser != null){
-            //reload();
-            myFirestore.getInstance().writeToDatabase(currentUser);
-        }
-    }
-
     public void create(View view) {
         String email = ((EditText) findViewById(R.id.editEmailAddress)).getText().toString();
         String password = ((EditText) findViewById(R.id.editPassword)).getText().toString();
@@ -79,7 +68,8 @@ public class LogonActivity extends AppCompatActivity {
                             System.out.println("signInWithEmail:success");
                             FirebaseUser user = auth.getCurrentUser();
                             //updateUI(user);
-                            myFirestore.getInstance().writeToDatabase(user);
+                            //myFirestore.getInstance().writeToDatabase(user);
+                            myFirestore.getInstance().restoreFromDatabase(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             System.out.println("signInWithEmail:failure " + task.getException());

@@ -8,6 +8,10 @@
         android:icon="@drawable/ic_backup"
         android:title="@string/upload"
         app:showAsAction="ifRoom" />
+    <item android:id="@+id/menuDownLoad"
+        android:icon="@drawable/ic_baseline_cloud_download_24"
+        android:title="Download"
+        app:showAsAction="ifRoom"/>
     <item android:id="@+id/menu_settings"
         android:title="@string/menuSettings"
         app:showAsAction="never"/>

@@ -62,6 +62,8 @@ public class ActivityView extends AppCompatActivity {
                 Intent intent = new Intent(this, LogonActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.menuDownLoad:
+                startActivity(new Intent(this, LogonActivity.class));
             default:
                 return super.onOptionsItemSelected(item);
         }
