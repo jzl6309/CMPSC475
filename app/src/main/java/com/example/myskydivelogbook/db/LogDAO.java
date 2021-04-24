@@ -13,6 +13,9 @@ public interface LogDAO {
     @Query("SELECT * FROM Logs ORDER BY jumpNum")
     LiveData<List<Log>> getAll();
 
+    @Query("SELECT * FROM Logs ORDER BY jumpNum")
+    List<Log> getCurrentLogs();
+
     @Query("SELECT * FROM Logs WHERE jumpNum = :jumpNum")
     Log getLog(int jumpNum);
 
@@ -28,7 +31,7 @@ public interface LogDAO {
     @Update
     void update(Log... log);
 
-    @Query("DELETE FROM logs WHERE jumpNum = :jumpNum")
+    @Query("DELETE FROM Logs WHERE jumpNum = :jumpNum")
     void delete(int jumpNum);
     
 }

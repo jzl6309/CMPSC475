@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.myskydivelogbook.db.Log;
 import com.example.myskydivelogbook.db.LogViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -58,13 +59,8 @@ public class ActivityView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuUpload:
-                myFirestore.getInstance().authenticate(this,((success, status) -> {
-                    if (success) System.out.println("YAAYYY!!! " + status);
-                    else System.out.println("BOOOO!! " + status);
-                }));
-
-                myFirestore.getInstance().writeToDatabase();
-
+                Intent intent = new Intent(this, LogonActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

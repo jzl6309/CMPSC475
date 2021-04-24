@@ -9,13 +9,18 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {Log.class}, version = 1, exportSchema = false)
+import java.util.List;
+
+@Database(entities = {Log.class}, version = 2, exportSchema = false)
 public abstract class LogDatabase extends RoomDatabase {
     public interface LogListener{
-        void onLogReturned(Log log);
+        void onLogReturned(Log log, int jumpNum);
     }
     public interface MaxListener{
         void onMaxReturned(int max);
+    }
+    public interface LogListListener{
+        void onListReturned(List<Log> logs);
     }
 
     public abstract LogDAO logDAO();
@@ -40,14 +45,19 @@ public abstract class LogDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            createLogTable();
         }
     };
 
-    private static void createLogTable() {
-    /*    for (int i = 0; i < DefaultContent.TITLE.length; i++) {
+    public static void getCurrentLogs(LogListListener listener) {
+        new AsyncTask<Void, Void, List<Log>>  () {
+            protected List<Log> doInBackground(Void... voids) {
+                return INSTANCE.logDAO().getCurrentLogs();
+            }
 
-        }*/
+            protected void onPostExecute(List<Log> logs) {
+                listener.onListReturned(logs);
+            }
+        }.execute();
     }
 
     public static void getLog(int jumpnum, LogListener listener) {
@@ -58,7 +68,7 @@ public abstract class LogDatabase extends RoomDatabase {
 
             protected void onPostExecute(Log log) {
                 super.onPostExecute(log);
-                listener.onLogReturned(log);
+                listener.onLogReturned(log, jumpnum);
             }
         }.execute(jumpnum);
     }

@@ -36,7 +36,7 @@ public class ActivityUpdate extends AppCompatActivity {
             ((EditText) findViewById(R.id.updateEditNotes)).setText(savedInstanceState.getString("notes"));
         }
         else {
-            LogDatabase.getLog(Integer.parseInt(jumpNum), log1 -> {
+            LogDatabase.getLog(Integer.parseInt(jumpNum), (log1, jump) -> {
                 Log log = log1;
 
                 ((EditText) findViewById(R.id.updateJumpNumDisplay)).setText(Integer.toString(log.jumpNum));

@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             if (maxJump > 0) {
                 ((TextView) findViewById(R.id.jumpNumberDisplay)).setText(Integer.toString(maxJump));
             }
-            LogDatabase.getLog(maxJump,log -> {
+            LogDatabase.getLog(maxJump,(log, jumpNum) -> {
                 Log myLog = log;
                 if (myLog != null) {
                     ((TextView) findViewById(R.id.lastJumpDiplay)).setText(myLog.date);
