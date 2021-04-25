@@ -18,6 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LogonActivity extends AppCompatActivity {
 
+    private static final boolean UPLOAD = true;
     private FirebaseAuth auth;
 
     @Override
@@ -67,9 +68,11 @@ public class LogonActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             System.out.println("signInWithEmail:success");
                             FirebaseUser user = auth.getCurrentUser();
-                            //updateUI(user);
-                            //myFirestore.getInstance().writeToDatabase(user);
-                            myFirestore.getInstance().restoreFromDatabase(user);
+                            Bundle bundle = getIntent().getExtras();
+
+                            if (bundle.getBoolean("direction") == UPLOAD) myFirestore.getInstance().writeToDatabase(user);
+                            else myFirestore.getInstance().restoreFromDatabase(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             System.out.println("signInWithEmail:failure " + task.getException());

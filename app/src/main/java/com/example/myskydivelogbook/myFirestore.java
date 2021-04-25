@@ -21,6 +21,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.w3c.dom.Text;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,31 +97,34 @@ public class myFirestore extends AppCompatActivity {
     public void restoreFromDatabase(FirebaseUser user) {
         db = FirebaseFirestore.getInstance();
 
-        int jumpNum = 9;
-        int i = 0;
-        DocumentReference docRef = db.collection(user.getEmail() + " logbook").document("jump " + Integer.toString(jumpNum));
-        docRef.get().addOnCompleteListener(task -> {
-            DocumentSnapshot doc = task.getResult();
-            if (doc.exists()) {
-                String[] docKey = ((String) doc.getId()).split(" ");
-                int jump = Integer.parseInt(docKey[1]);
-                String date = (String) doc.get("date");
-                String location = (String) doc.get("location");
-                String aircraft = (String) doc.get("aircraft");
-                String equipment = (String) doc.get("equipment");
-                String altitude = (String) doc.get("altitude");
-                String delay = (String) doc.get("delay");
-                String wind = (String) doc.get("wind");
-                String target = (String) doc.get("target");
-                String sign = (String) doc.get("signature");
-                String notes = (String) doc.get("notes");
+        getMaxJump(max -> {
+            int i = 0;
+            while (i < max) {
+                DocumentReference docRef = db.collection(user.getEmail() + " logbook").document("jump " + Integer.toString(i));
+                docRef.get().addOnCompleteListener(task -> {
+                    DocumentSnapshot doc = task.getResult();
+                    if (doc.exists()) {
+                        String[] docKey = ((String) doc.getId()).split(" ");
+                        int jump = Integer.parseInt(docKey[1]);
+                        String date = (String) doc.get("date");
+                        String location = (String) doc.get("location");
+                        String aircraft = (String) doc.get("aircraft");
+                        String equipment = (String) doc.get("equipment");
+                        String altitude = (String) doc.get("altitude");
+                        String delay = (String) doc.get("delay");
+                        String wind = (String) doc.get("wind");
+                        String target = (String) doc.get("target");
+                        String sign = (String) doc.get("signature");
+                        String notes = (String) doc.get("notes");
 
-                Log log = new Log(jump, date, location, aircraft, equipment, altitude, delay, wind, target, sign, notes);
+                        Log log = new Log(jump, date, location, aircraft, equipment, altitude, delay, wind, target, sign, notes);
 
-                insert(log);
-                docRef.delete();
+                        insert(log);
+                        docRef.delete();
+                    }
+                });
+                i++;
             }
         });
-
     }
 }

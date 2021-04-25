@@ -1,6 +1,7 @@
 package com.example.myskydivelogbook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,15 +19,16 @@ import android.widget.TextView;
 
 import com.example.myskydivelogbook.db.Log;
 import com.example.myskydivelogbook.db.LogViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
-public class ActivityView extends AppCompatActivity {
+public class ActivityView extends AppCompatActivity implements UploadConfirmationDialog.UploadConformationListener,
+        DownloadConfirmationDialog.DownloadConfirmationListener {
 
     private LogViewModel logViewModel;
     private Menu optionsMenu;
-    private static final String TAG = "LOOK HERE: ";
+    private static final boolean UPLOAD = true;
+    private static final boolean DOWNLOAD = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +61,31 @@ public class ActivityView extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuUpload:
-                Intent intent = new Intent(this, LogonActivity.class);
-                startActivity(intent);
+                DialogFragment dialogFragment = new UploadConfirmationDialog();
+                dialogFragment.show(getSupportFragmentManager(), "uploadDialog");
                 return true;
             case R.id.menuDownLoad:
-                startActivity(new Intent(this, LogonActivity.class));
+                DialogFragment dialogFragment1 = new DownloadConfirmationDialog();
+                dialogFragment1.show(getSupportFragmentManager(),"downloadDialog");
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    public void onDownloadConfirmation() {
+        Bundle bundle1 = new Bundle();
+        bundle1.putBoolean("direction", DOWNLOAD);
+        startActivity(new Intent(this, LogonActivity.class).putExtras(bundle1));
+    }
+
+    public void onUploadConfirmation() {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("direction", UPLOAD);
+        Intent intent = new Intent(this, LogonActivity.class);
+        startActivity(intent.putExtras(bundle));
+    }
+
 
     public void add(View view) {
         Intent intent = new Intent(this, activityAdd.class);
