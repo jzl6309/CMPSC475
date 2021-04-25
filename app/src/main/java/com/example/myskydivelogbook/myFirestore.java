@@ -1,44 +1,23 @@
 package com.example.myskydivelogbook;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.widget.EditText;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myskydivelogbook.db.Log;
-import com.example.myskydivelogbook.db.LogDatabase;
-import com.example.myskydivelogbook.db.LogViewModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import static com.example.myskydivelogbook.db.LogDatabase.delete;
-import static com.example.myskydivelogbook.db.LogDatabase.getCount;
 import static com.example.myskydivelogbook.db.LogDatabase.getCurrentLogs;
-import static com.example.myskydivelogbook.db.LogDatabase.getLog;
 import static com.example.myskydivelogbook.db.LogDatabase.getMaxJump;
 import static com.example.myskydivelogbook.db.LogDatabase.insert;
 
 public class myFirestore extends AppCompatActivity {
-    public interface OnAuthenticateListener {
-        void onAuthenticated(boolean success, String status);
-    }
 
     private FirebaseUser user;
     private FirebaseFirestore db;
