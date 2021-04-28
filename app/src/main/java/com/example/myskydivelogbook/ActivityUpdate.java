@@ -11,8 +11,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myskydivelogbook.db.Log;
 import com.example.myskydivelogbook.db.LogDatabase;
+import com.google.android.material.snackbar.Snackbar;
 
 public class ActivityUpdate extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,22 +59,21 @@ public class ActivityUpdate extends AppCompatActivity {
 
     public void update(View view) {
 
-        int jumpNum = Integer.parseInt(((TextView)findViewById(R.id.updateJumpNumDisplay)).getText().toString());
-        String date = ((EditText)findViewById(R.id.updateEditTextDate)).getText().toString();
-        String location = ((EditText)findViewById(R.id.updateLocationDisplay)).getText().toString();
-        String aircraft = ((EditText)findViewById(R.id.updateEditAircraft)).getText().toString();
-        String equipment = ((EditText)findViewById(R.id.updateEditGearLabel)).getText().toString();
-        String altitude = ((EditText)findViewById(R.id.updateEditExitAlt)).getText().toString();
-        String delay = ((EditText)findViewById(R.id.updateEditDelay)).getText().toString();
-        String wind = ((EditText)findViewById(R.id.updateEditSurfaceWind)).getText().toString();
-        String target = ((EditText)findViewById(R.id.updateEditDistTarget)).getText().toString();
-        String sign = ((EditText)findViewById(R.id.updateEditSignature)).getText().toString();
-        String notes = ((EditText)findViewById(R.id.updateEditNotes)).getText().toString();
+        int jumpNum = Integer.parseInt(((TextView)findViewById(R.id.updateJumpNumDisplay)).getText().toString().trim());
+        String date = ((EditText) findViewById(R.id.updateEditTextDate)).getText().toString();
+        String location = ((EditText) findViewById(R.id.updateLocationDisplay)).getText().toString();
+        String aircraft = ((EditText) findViewById(R.id.updateEditAircraft)).getText().toString();
+        String equipment = ((EditText) findViewById(R.id.updateEditGearLabel)).getText().toString();
+        String altitude = ((EditText) findViewById(R.id.updateEditExitAlt)).getText().toString();
+        String delay = ((EditText) findViewById(R.id.updateEditDelay)).getText().toString();
+        String wind = ((EditText) findViewById(R.id.updateEditSurfaceWind)).getText().toString();
+        String target = ((EditText) findViewById(R.id.updateEditDistTarget)).getText().toString();
+        String sign = ((EditText) findViewById(R.id.updateEditSignature)).getText().toString();
+        String notes = ((EditText) findViewById(R.id.updateEditNotes)).getText().toString();
 
-        Log log = new Log(jumpNum,date,location,aircraft,equipment,altitude,delay,wind,target,sign,notes);
+        Log log = new Log(jumpNum, date, location, aircraft, equipment, altitude, delay, wind, target, sign, notes);
 
         LogDatabase.update(log);
-
         startActivity(new Intent(this, ActivityView.class));
     }
 

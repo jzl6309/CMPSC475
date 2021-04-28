@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myskydivelogbook.db.Log;
 import com.example.myskydivelogbook.db.LogDatabase;
+import com.google.android.material.snackbar.Snackbar;
 
 public class activityAdd extends AppCompatActivity {
 
@@ -21,37 +23,46 @@ public class activityAdd extends AppCompatActivity {
 
     public void save(View view) {
 
-        int jumpNum = Integer.parseInt(((TextView)findViewById(R.id.addJumpNumDisplay)).getText().toString());
-        String date = ((EditText)findViewById(R.id.addEditTextDate)).getText().toString();
-        String location = ((EditText)findViewById(R.id.addLocationDisplay)).getText().toString();
-        String aircraft = ((EditText)findViewById(R.id.addEditAircraft)).getText().toString();
-        String equipment = ((EditText)findViewById(R.id.addEditGearLabel)).getText().toString();
-        String altitude = ((EditText)findViewById(R.id.addEditExitAlt)).getText().toString();
-        String delay = ((EditText)findViewById(R.id.addEditDelay)).getText().toString();
-        String wind = ((EditText)findViewById(R.id.addEditSurfaceWind)).getText().toString();
-        String target = ((EditText)findViewById(R.id.addEditDistTarget)).getText().toString();
-        String sign = ((EditText)findViewById(R.id.addEditSignature)).getText().toString();
-        String notes = ((EditText)findViewById(R.id.addEditNotes)).getText().toString();
+        int jumpNum = Integer.parseInt(((TextView)findViewById(R.id.addJumpNumDisplay)).getText().toString().trim());
 
-        Log log = new Log(jumpNum,date,location,aircraft,equipment,altitude,delay,wind,target,sign,notes);
+        LogDatabase.getLog(jumpNum, (log, jumpNum1) -> {
 
-        LogDatabase.insert(log);
+            if (log == null ) {
+                String date = ((EditText) findViewById(R.id.addEditTextDate)).getText().toString();
+                String location = ((EditText) findViewById(R.id.addLocationDisplay)).getText().toString();
+                String aircraft = ((EditText) findViewById(R.id.addEditAircraft)).getText().toString();
+                String equipment = ((EditText) findViewById(R.id.addEditGearLabel)).getText().toString();
+                String altitude = ((EditText) findViewById(R.id.addEditExitAlt)).getText().toString();
+                String delay = ((EditText) findViewById(R.id.addEditDelay)).getText().toString();
+                String wind = ((EditText) findViewById(R.id.addEditSurfaceWind)).getText().toString();
+                String target = ((EditText) findViewById(R.id.addEditDistTarget)).getText().toString();
+                String sign = ((EditText) findViewById(R.id.addEditSignature)).getText().toString();
 
-        ((TextView)findViewById(R.id.addJumpNumDisplay)).setText("");
-        ((EditText)findViewById(R.id.addEditTextDate)).setText("");
-        ((EditText)findViewById(R.id.addLocationDisplay)).setText("");
-        ((EditText)findViewById(R.id.addEditAircraft)).setText("");
-        ((EditText)findViewById(R.id.addEditGearLabel)).setText("");
-        ((EditText)findViewById(R.id.addEditExitAlt)).setText("");
-        ((EditText)findViewById(R.id.addEditDelay)).setText("");
-        ((EditText)findViewById(R.id.addEditSurfaceWind)).setText("");
-        ((EditText)findViewById(R.id.addEditDistTarget)).setText("");
-        ((EditText)findViewById(R.id.addEditSignature)).setText("");
-        ((EditText)findViewById(R.id.addEditNotes)).setText("");
+                String notes = ((EditText) findViewById(R.id.addEditNotes)).getText().toString();
 
-        findViewById(R.id.addJumpNumDisplay).setFocusable(true);
-        findViewById(R.id.addJumpNumDisplay).requestFocus();
+                Log log1 = new Log(jumpNum, date, location, aircraft, equipment, altitude, delay, wind, target, sign, notes);
 
+                LogDatabase.insert(log1);
+            }
+            else {
+                Snackbar.make(view,"There was an issue. Please try again.",Snackbar.LENGTH_LONG ).show();
+            }
+
+            ((TextView)findViewById(R.id.addJumpNumDisplay)).setText("");
+            ((EditText)findViewById(R.id.addEditTextDate)).setText("");
+            ((EditText)findViewById(R.id.addLocationDisplay)).setText("");
+            ((EditText)findViewById(R.id.addEditAircraft)).setText("");
+            ((EditText)findViewById(R.id.addEditGearLabel)).setText("");
+            ((EditText)findViewById(R.id.addEditExitAlt)).setText("");
+            ((EditText)findViewById(R.id.addEditDelay)).setText("");
+            ((EditText)findViewById(R.id.addEditSurfaceWind)).setText("");
+            ((EditText)findViewById(R.id.addEditDistTarget)).setText("");
+            ((EditText)findViewById(R.id.addEditSignature)).setText("");
+            ((EditText)findViewById(R.id.addEditNotes)).setText("");
+
+            findViewById(R.id.addJumpNumDisplay).setFocusable(true);
+            findViewById(R.id.addJumpNumDisplay).requestFocus();
+        });
     }
 
     public void back(View view){

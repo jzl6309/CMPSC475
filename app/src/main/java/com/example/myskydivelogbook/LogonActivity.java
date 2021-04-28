@@ -41,19 +41,19 @@ public class LogonActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             System.out.println("SUCCESSFUL!!!");
                             FirebaseUser user = auth.getCurrentUser();
-                            Toast.makeText(LogonActivity.this,"Please login",Toast.LENGTH_LONG);
-                            startActivity(new Intent(LogonActivity.this,LogonActivity.class));
+                            Toast.makeText(LogonActivity.this,"Please login with new credentials",Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(LogonActivity.this,LogonActivity.class).putExtras(getIntent().getExtras()));
                         } else {
                             // If sign in fails, display a message to the user.
                             System.out.println("createUserWithEmail:failure " + task.getException());
                             Toast.makeText(LogonActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+
+                            startActivity(new Intent(LogonActivity.this,ActivityView.class));
                         }
                     }
                 });
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(this,ActivityView.class));
-
     }
 
     public void signIn(View view) {
