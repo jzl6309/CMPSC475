@@ -15,6 +15,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.io.Console;
+
 
 public class LogonActivity extends AppCompatActivity {
 
@@ -33,6 +35,9 @@ public class LogonActivity extends AppCompatActivity {
         String email = ((EditText) findViewById(R.id.editEmailAddress)).getText().toString();
         String password = ((EditText) findViewById(R.id.editPassword)).getText().toString();
 
+
+
+        /*
         auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -54,12 +59,27 @@ public class LogonActivity extends AppCompatActivity {
                     }
                 });
         FirebaseAuth.getInstance().signOut();
+        */
     }
 
     public void signIn(View view) {
         String email = ((EditText) findViewById(R.id.editEmailAddress)).getText().toString();
         String password = ((EditText) findViewById(R.id.editPassword)).getText().toString();
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -84,5 +104,8 @@ public class LogonActivity extends AppCompatActivity {
                 });
         FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(this,ActivityView.class));
+
+        */
     }
+
 }
