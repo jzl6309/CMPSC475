@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,8 +15,6 @@ import com.example.myskydivelogbook.db.LogDatabase;
 import com.google.android.material.snackbar.Snackbar;
 
 public class ActivityUpdate extends AppCompatActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +58,15 @@ public class ActivityUpdate extends AppCompatActivity {
 
     public void update(View view) {
 
-        int jumpNum = Integer.parseInt(((TextView)findViewById(R.id.updateJumpNumDisplay)).getText().toString().trim());
+        int jumpNum = 0;
+        try {
+            jumpNum = Integer.parseInt(((TextView) findViewById(R.id.updateJumpNumDisplay)).getText().toString().trim());
+        }
+        catch (NumberFormatException e) {
+            Toast.makeText(this, "Unable to update! You must enter a valid jump number!", Toast.LENGTH_LONG).show();
+            startActivity(new Intent(this, ActivityView.class));
+        }
+
         String date = ((EditText) findViewById(R.id.updateEditTextDate)).getText().toString();
         String location = ((EditText) findViewById(R.id.updateLocationDisplay)).getText().toString();
         String aircraft = ((EditText) findViewById(R.id.updateEditAircraft)).getText().toString();

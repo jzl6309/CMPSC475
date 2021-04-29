@@ -1,5 +1,6 @@
 package com.example.myskydivelogbook;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -32,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 
-        String name = sharedPref.getString("name","");
-        String nameHint = sharedPref.getString("nameHint","");
+        String name = sharedPref.getString("name", "");
+        String nameHint = sharedPref.getString("nameHint", "");
         String memID = sharedPref.getString("MemID", "");
         String license = sharedPref.getString("license", "");
         newUser = sharedPref.getBoolean("newUser", true);
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (license != null)
             ((EditText) (findViewById(R.id.uspaLicenseDisplay))).setText(license);
+
 
         if (newUser) {
             Toast.makeText(this, "To enter your info, click the edit icon", Toast.LENGTH_LONG).show();
@@ -113,6 +115,15 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             default: return true;
         }
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outstate) {
+        super.onSaveInstanceState(outstate);
+
+        outstate.putBoolean("edit",edit);
+        outstate.getBoolean("newUser",newUser);
+
     }
 
     public void add(View view) {

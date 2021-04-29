@@ -23,8 +23,14 @@ public class activityAdd extends AppCompatActivity {
 
     public void save(View view) {
 
-        int jumpNum = Integer.parseInt(((TextView)findViewById(R.id.addJumpNumDisplay)).getText().toString().trim());
-
+        int jumpNum;
+        try {
+            jumpNum = Integer.parseInt(((TextView) findViewById(R.id.addJumpNumDisplay)).getText().toString().trim());
+        }
+        catch (NumberFormatException e) {
+            Toast.makeText(this, "Unable to update! You must enter a valid jump number!", Toast.LENGTH_LONG).show();
+            return;
+        }
         LogDatabase.getLog(jumpNum, (log, jumpNum1) -> {
 
             if (log == null ) {
